@@ -1,46 +1,24 @@
 from adafruit_circuitplayground import cp 
 import time
 
-#test the slider switch
-if cp.switch:
-    cp.red = True
-else:
-    cp.red = False
+#use 2 for loops to control the neopixel LEDs to go back and forth between
+#the first and last pixels
+BLACK = (0, 0, 0)
+delay_on = .3
+delay_off = .1
+forward_color = (0, 100, 0)
+reverse_color = (100, 0, 0)
 
-#test A and B buttons
-if cp.button_a:
-    cp.play_file("bass_hit_c.wav")
 
-if cp.button_b:
-    cp.play_file("elec_hi_snare.wav")
-
-#test capacitive Touch Pads A1 - A6
-if cp.touch_A1:
-    cp.pixels[0] = (100, 100, 100)
-else:
-    cp.pixels[0] = (0, 0, 0)
-
-if cp.touch_A2:
-    cp.pixels[1] = (100, 100, 100)
-else:
-    cp.pixels[1] = (0, 0, 0)
-
-if cp.touch_A3:
-    cp.pixels[2] = (100, 100, 100)
-else:
-    cp.pixels[2] = (0, 0, 0)
-
-if cp.touch_A4:
-    cp.pixels[3] = (100, 100, 100)
-else:
-    cp.pixels[3] = (0, 0, 0)
-
-if cp.touch_A5:
-    cp.pixels[4] = (100, 100, 100)
-else:
-    cp.pixels[4] = (0, 0, 0)    
-
-if cp.touch_A6:
-    cp.pixels[5] = (100, 100, 100)
-else:
-    cp.pixels[5] = (0, 0, 0)
+while True:
+    for i in range(0, 10):
+        cp.pixels[i] = (forward_color)
+        time.sleep(delay_on)
+        cp.pixels[i] = (BLACK)
+        time.sleep(delay_off)
+    
+    for i in range(9, -1, -1):
+        cp.pixels[i] = (reverse_color)
+        time.sleep(delay_on)
+        cp.pixels[i] = (0, 0, 0)
+        time.sleep(delay_off)
